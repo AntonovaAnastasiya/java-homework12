@@ -13,7 +13,7 @@ class ProductManagerTest {
     ProductManager productManager = new ProductManager(repository);
     Book firstBook = new Book(1, "Trees", 200, "Ivanov Ivan");
     Book secondBook = new Book(2, "Flowers", 250, "Petrov Petr");
-    Book thirdBook = new Book(3, "Peoples", 320, "Karpov Ilya");
+    Book thirdBook = new Book(3, "People or Animal", 320, "Karpov Ilya");
     Book fourthBook = new Book(4, "Animal", 270, "Drozdov Sergei");
     Smartphone firstSmartphone = new Smartphone(5, "Samsung", 5000, "Japan");
     Smartphone secondSmartphone = new Smartphone(6, "Nokia", 2000, "Korea");
@@ -36,7 +36,6 @@ class ProductManagerTest {
         assertArrayEquals(expected, actual);
     }
 
-
     @Test
     void searchByDifferentClasses() {
         productManager.add(firstBook);
@@ -49,6 +48,21 @@ class ProductManagerTest {
 
         Product[] actual = productManager.searchBy("Water");
         Product[] expected = new Product[0];
+        assertArrayEquals(expected, actual);
+    }
+
+    @Test
+    void shouldSearchBySomeProductFitRequest() {
+        productManager.add(firstBook);
+        productManager.add(secondBook);
+        productManager.add(thirdBook);
+        productManager.add(fourthBook);
+        productManager.add(firstSmartphone);
+        productManager.add(secondSmartphone);
+        productManager.add(thirdSmartphone);
+
+        Product[] actual = productManager.searchBy("Animal");
+        Product[] expected = new Product[] {thirdBook, fourthBook};
         assertArrayEquals(expected, actual);
     }
 }
