@@ -31,8 +31,8 @@ class ProductManagerTest {
         productManager.add(secondSmartphone);
         productManager.add(thirdSmartphone);
 
-        Product[] actual = productManager.searchBy("Animal");
-        Product[] expected = new Product[] {fourthBook};
+        Product[] actual = productManager.searchBy("Trees");
+        Product[] expected = new Product[] {firstBook};
         assertArrayEquals(expected, actual);
     }
 
