@@ -19,17 +19,13 @@ public class ProductManager {
 
     public Product[] searchBy(String text) {
         Product[] result = new Product[0];
-        int i = 0;
-        Product[] tmp = new Product[repository.findAll().length];
         for (Product product : repository.findAll()) {
             if (matches(product, text)) {
-                tmp[i] = product;
-                i++;
+                Product[] tmp = new Product[result.length + 1];
+                System.arraycopy(result, 0, tmp, 0, result.length);
+                tmp[tmp.length - 1] = product;
+                result = tmp;
             }
-        }
-        if (i != 0) {
-            result = new Product[i];
-            System.arraycopy(tmp, 0, result, 0, i);
         }
         return result;
     }
